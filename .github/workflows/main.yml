@@ -11,8 +11,8 @@ env:
   APP_PORT: ""
 
   IMAGE_REGISTRY: image-registry.openshift-image-registry.svc:5000/winnext-dev/facility-client
-  IMAGE_REGISTRY_USER: ${{ github.actor }}
-  IMAGE_REGISTRY_PASSWORD: ${{ github.token }}
+  IMAGE_REGISTRY_USER: ${{ secrets.OPENSHIFT_SERVER }}
+  IMAGE_REGISTRY_PASSWORD: ${{secrets.OPENSHIFT_TOKEN}}
 
   IMAGE_TAGS: ""
 
