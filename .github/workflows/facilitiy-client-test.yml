@@ -11,8 +11,8 @@ env:
   APP_PORT: ""
 
   IMAGE_REGISTRY: image-registry.openshift-image-registry.svc:5000/winnext-dev/facility-client
-  IMAGE_REGISTRY_USER: ${{ secrets.OPENSHIFT_SERVER }}
-  IMAGE_REGISTRY_PASSWORD: ${{secrets.OPENSHIFT_TOKEN}}
+  IMAGE_REGISTRY_USER: kubeadmin
+  IMAGE_REGISTRY_PASSWORD: sha256~peL-zlT1sPMMgcbiVa5IaFD3rgl6lP2H2PBu4wwTQBY
 
   IMAGE_TAGS: ""
 
