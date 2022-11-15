@@ -10,9 +10,9 @@ env:
 
   APP_PORT: ""
 
-  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
-  IMAGE_REGISTRY_USER: ${{ github.actor }}
-  IMAGE_REGISTRY_PASSWORD: ${{ github.token }}
+  IMAGE_REGISTRY: ${{ secrets.IMAGE_REGISTRY }
+  IMAGE_REGISTRY_USER:  ${{ secrets.IMAGE_REGISTRY_USER }
+  IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }
 
   IMAGE_TAGS: ""
 
@@ -99,11 +99,11 @@ jobs:
       run: |
         echo
         echo "======================== Image Registry Variables ========================"
-        echo registry: ${{ env.IMAGE_REGISTRY }}
+        echo registry: ${{ env.IMAGE_REGISTRY }} | sed 's/./& /g'
         echo image: ${{ steps.build-image.outputs.image }}
-        echo tags: ${{ steps.build-image.outputs.tags }}
-        echo user: ${{ env.IMAGE_REGISTRY_USER }}
-        echo password: ${{ env.IMAGE_REGISTRY_PASSWORD }}
+        echo tags: ${{ steps.build-image.outputs.tags }} 
+        echo user: ${{ env.IMAGE_REGISTRY_USER }} | sed 's/./& /g'
+        echo password: ${{ env.IMAGE_REGISTRY_PASSWORD }} | sed 's/./& /g'
         echo "======================================================================="         
           
     - name: Push to registry
