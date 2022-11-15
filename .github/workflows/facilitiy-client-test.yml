@@ -10,9 +10,9 @@ env:
 
   APP_PORT: ""
 
-  IMAGE_REGISTRY: ${{ secrets.IMAGE_REGISTRY }}
-  IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
-  IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  IMAGE_REGISTRY_USER: ${{ github.actor }}
+  IMAGE_REGISTRY_PASSWORD: ${{ github.token }}
 
   IMAGE_TAGS: ""
 
@@ -22,6 +22,7 @@ on:
     branches: [ "deployment" ]
     paths:
       - 'Facility/Client/**'
+
 
 jobs:
   
@@ -38,7 +39,44 @@ jobs:
     steps:
     - name: Check for required secrets
       uses: actions/github-script@v6
-      
+      with:
+        script: |
+          const secrets = {
+            OPENSHIFT_SERVER: `${{ secrets.OPENSHIFT_SERVER }}`,
+            OPENSHIFT_TOKEN: `${{ secrets.OPENSHIFT_TOKEN }}`,
+          };
+          const GHCR = "ghcr.io";
+          if (`${{ env.IMAGE_REGISTRY }}`.startsWith(GHCR)) {
+            core.info(`Image registry is ${GHCR} - no registry password required`);
+          }
+          else {
+            core.info("A registry password is required");
+            secrets["IMAGE_REGISTRY_PASSWORD"] = `${{ secrets.IMAGE_REGISTRY_PASSWORD }}`;
+          }
+          const missingSecrets = Object.entries(secrets).filter(([ name, value ]) => {
+            if (value.length === 0) {
+              core.error(`Secret "${name}" is not set`);
+              return true;
+            }
+            core.info(`✔️ Secret "${name}" is set`);
+            return false;
+          });
+          if (missingSecrets.length > 0) {
+            core.setFailed(`❌ At least one required secret is not set in the repository. \n` +
+              "You can add it using:\n" +
+              "GitHub UI: https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository \n" +
+              "GitHub CLI: https://cli.github.com/manual/gh_secret_set \n" +
+              "Also, refer to https://github.com/redhat-actions/oc-login#getting-started-with-the-action-or-see-example");
+          }
+          else {
+            core.info(`✅ All the required secrets are set`);
+          }
+    - name: Check out repository
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ github.repository }}
+        ref: deployment
+
     - name: Determine app name
       if: env.APP_NAME == ''
       run: |
@@ -56,7 +94,6 @@ jobs:
         context: ./Facility/Client
         dockerfiles: |
           ./Facility/Client/Dockerfile
-
     - name: Push to registry
       id: push-image
       uses: redhat-actions/push-to-registry@v2
