@@ -99,11 +99,11 @@ jobs:
       run: |
         echo
         echo "======================== Image Registry Variables ========================"
-        echo registry: ${{ env.IMAGE_REGISTRY }} | sed 's/./& /g'
+        echo registry: ${{ env.IMAGE_REGISTRY }}  
         echo image: ${{ steps.build-image.outputs.image }}
         echo tags: ${{ steps.build-image.outputs.tags }} 
-        echo user: ${{ env.IMAGE_REGISTRY_USER }} | sed 's/./& /g'
-        echo password: ${{ env.IMAGE_REGISTRY_PASSWORD }} | sed 's/./& /g'
+        echo user: ${{ env.IMAGE_REGISTRY_USER }}  
+        echo password: ${{ env.IMAGE_REGISTRY_PASSWORD }}
         echo "======================================================================="         
           
     - name: Push to registry
