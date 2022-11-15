@@ -94,6 +94,18 @@ jobs:
         context: ./Facility/Client
         dockerfiles: |
           ./Facility/Client/Dockerfile
+          
+    - name: Print image registry variables
+      run: |
+        echo
+        echo "======================== Image Registry Variables ========================"
+        echo registry: ${{ env.IMAGE_REGISTRY }}
+        echo image: ${{ steps.build-image.outputs.image }}
+        echo tags: ${{ steps.build-image.outputs.tags }}
+        echo user: ${{ env.IMAGE_REGISTRY_USER }}
+        echo password: ${{ env.IMAGE_REGISTRY_PASSWORD }}
+        echo "======================================================================="         
+          
     - name: Push to registry
       id: push-image
       uses: redhat-actions/push-to-registry@v2
