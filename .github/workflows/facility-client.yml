@@ -95,7 +95,7 @@ jobs:
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: playground/${{ env.APP_NAME }}
+        image: winnext-dev/${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
         context: ./Facility/Client
         dockerfiles: |
