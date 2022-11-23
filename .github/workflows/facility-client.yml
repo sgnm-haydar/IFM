@@ -86,11 +86,13 @@ jobs:
       if: env.IMAGE_TAGS == ''
       run: |
         echo "IMAGE_TAGS=latest ${GITHUB_SHA::12}" | tee -a $GITHUB_ENV
+        
     - name: Build from Dockerfile
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
         image: winnext-dev/${{ env.APP_NAME }}
+        registry: ${{ env.IMAGE_REGISTRY_TEST }}
         tags: ${{ env.IMAGE_TAGS }}
         context: ./Facility/Client
         dockerfiles: |
