@@ -1,4 +1,4 @@
-name: Facility Client Workflow
+name: IFM Facility Client Workflow
 
 on:
   workflow_dispatch:
