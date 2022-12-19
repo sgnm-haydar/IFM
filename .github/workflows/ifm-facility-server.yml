@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build and push image
-    runs-on: ubuntu-20.04
+    runs-on: centos-7
 
     steps:
     - uses: actions/checkout@v2
