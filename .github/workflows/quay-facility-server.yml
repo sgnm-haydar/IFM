@@ -1,4 +1,4 @@
-name: IFM Facility Server Workflow
+name: quay Facility Server Workflow
 
 on:
   workflow_dispatch:
