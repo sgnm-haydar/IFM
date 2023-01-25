@@ -11,7 +11,7 @@ env:
 
   APP_PORT: ""
 
-  IMAGE_REGISTRY: ${{ secrets.test }}
+  IMAGE_REGISTRY: ${{ secrets.TEST }}
   IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
   IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
 
@@ -47,7 +47,7 @@ jobs:
             OPENSHIFT_TOKEN: `${{ secrets.OPENSHIFT_TOKEN }}`,
           };
           const GHCR = "ghcr.io";
-          if (`${{ env.IMAGE_REGISTRY }}`.startsWith(GHCR)) {
+          if (`${{ env.TEST }}`.startsWith(GHCR)) {
             core.info(`Image registry is ${GHCR} - no registry password required`);
           }
           else {
@@ -103,7 +103,7 @@ jobs:
       with:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
-        registry: ${{ env.test }}
+        registry: ${{ env.TEST }}
         username: ${{ env.IMAGE_REGISTRY_USER }}
         password: ${{ env.IMAGE_REGISTRY_PASSWORD }}
         tls-verify: false
