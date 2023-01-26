@@ -11,7 +11,7 @@ env:
 
   APP_PORT: ""
 
-  IMAGE_REGISTRY: ${{ secrets.TEST }}
+  IMAGE_REGISTRY: ${{ secrets.IMAGE_REGISTRY }}
   IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
   IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
 
@@ -103,7 +103,7 @@ jobs:
       with:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
-        registry: ${{ env.TEST }}
+        registry: ${{ env.IMAGE_REGISTRY }}
         username: ${{ env.IMAGE_REGISTRY_USER }}
         password: ${{ env.IMAGE_REGISTRY_PASSWORD }}
         tls-verify: false
