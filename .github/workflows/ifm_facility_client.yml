@@ -4,7 +4,7 @@ env:
 
   OPENSHIFT_SERVER: ${{ secrets.IFM_OCP_SERVER }}
   OPENSHIFT_TOKEN: ${{ secrets.IFM_OPENSHIFT_TOKEN }}
-  OPENSHIFT_NAMESPACE: "winnext-dev"
+  OPENSHIFT_NAMESPACE: "winnext-app"
 
   APP_NAME: "facility-client"
 
@@ -90,7 +90,7 @@ jobs:
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: winnext-dev/${{ env.APP_NAME }}
+        image: winnext-app/${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
         context: ./Facility/Client
         dockerfiles: |
