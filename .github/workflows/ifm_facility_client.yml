@@ -86,25 +86,16 @@ jobs:
       run: |
         echo "IMAGE_TAGS=latest ${GITHUB_SHA::12}" | tee -a $GITHUB_ENV
         
-#     - name: Build from Dockerfile
-#       id: build-image
-#       uses: redhat-actions/buildah-build@v2
-#       with:
-#         image: winnext-app/${{ env.APP_NAME }}
-#         tags: ${{ env.IMAGE_TAGS }}
-#         context: ./Facility/Client
-#         dockerfiles: |
-#           ./Facility/Client/Dockerfile
-    - name: Set env as secret
-      run: |
-        import os
-        for q in (os.getenv("IMAGE_REGISTRY")):
-          print(q)
-        for q in (os.getenv("IMAGE_REGISTRY_USER")):
-          print(q)
-        for q in (os.getenv("IMAGE_REGISTRY_PASSWORD")):
-          print(q)          
-      shell: python         
+    - name: Build from Dockerfile
+      id: build-image
+      uses: redhat-actions/buildah-build@v2
+      with:
+        image: winnext-app/${{ env.APP_NAME }}
+        tags: ${{ env.IMAGE_TAGS }}
+        context: ./Facility/Client
+        dockerfiles: |
+          ./Facility/Client/Dockerfile
+
     - name: Push to registry
       id: push-image
       uses: redhat-actions/push-to-registry@v2
