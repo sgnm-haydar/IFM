@@ -102,7 +102,7 @@ jobs:
       with:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
-        registry: ${{ env.IFM_IMAGE_REGISTRY }}
-        username: ${{ env.IFM_IMAGE_REGISTRY_USER }}
-        password: ${{ env.IFM_IMAGE_REGISTRY_PASSWORD }}
+        registry: ${{ env.IMAGE_REGISTRY }}
+        username: ${{ env.IMAGE_REGISTRY_USER }}
+        password: ${{ env.IMAGE_REGISTRY_PASSWORD }}
         tls-verify: false
