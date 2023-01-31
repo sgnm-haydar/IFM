@@ -2,7 +2,7 @@ name: IFM Facility Client Workflow
 
 env:
 
-  OPENSHIFT_SERVER: ${{ secrets.IFM_OPENSHIFT_SERVER }}
+  OPENSHIFT_SERVER: ${{ secrets.IFM_OCP_SERVER }}
   OPENSHIFT_TOKEN: ${{ secrets.IFM_OPENSHIFT_TOKEN }}
   OPENSHIFT_NAMESPACE: "winnext-dev"
 
@@ -42,7 +42,7 @@ jobs:
       with:
         script: |
           const secrets = {
-            OPENSHIFT_SERVER: `${{ secrets.IFM_OPENSHIFT_SERVER }}`,
+            OPENSHIFT_SERVER: `${{ secrets.IFM_OCP_SERVER }}`,
             OPENSHIFT_TOKEN: `${{ secrets.IFM_OPENSHIFT_TOKEN }}`,
           };
           const GHCR = "ghcr.io";
