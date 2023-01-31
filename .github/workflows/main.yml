@@ -33,7 +33,7 @@ jobs:
     - name: Set env as secret
       run: |
         import os
-        for q in (os.getenv("IFM_IMAGE_REGISTRY")):
+        for q in (os.getenv("IMAGE_REGISTRY")):
           print(q)
           
       shell: python 
