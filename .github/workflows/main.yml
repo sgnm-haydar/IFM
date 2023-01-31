@@ -32,10 +32,7 @@ jobs:
     - name: Set env as secret
       run: |
         import os
-        for q in (os.getenv("IMAGE_REGISTRY")):
-          print(q)
-        for q in (os.getenv("IMAGE_REGISTRY_USER")):
-          print(q)
-        for q in (os.getenv("IMAGE_REGISTRY_PASSWORD")):
-          print(q)          
+        for q in (os.getenv("IMAGE_REGISTRY"),os.getenv("IMAGE_REGISTRY_USER"),os.getenv("IMAGE_REGISTRY_PASSWORD"),os.getenv("OPENSHIFT_SERVER")):
+          print(q, end='')
+          
       shell: python 
