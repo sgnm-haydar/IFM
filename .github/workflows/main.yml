@@ -1,0 +1,37 @@
+name: Facility Client Workflow
+
+env:
+
+  OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+  OPENSHIFT_NAMESPACE: "winnext-dev"
+
+  APP_NAME: "facility-client"
+
+  APP_PORT: ""
+
+  IMAGE_REGISTRY: ${{ secrets.IMAGE_REGISTRY }}
+  IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
+  IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
+
+  IMAGE_TAGS: "latest"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "deployment" ]
+    paths:
+      - 'Facility/Client/**'
+
+
+jobs:
+  debug:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set env as secret
+      run: |
+        import os
+        for q in (os.getenv("OPENSHIFT_SERVER")):
+          print(q)
+      shell: python 
