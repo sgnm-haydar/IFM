@@ -11,6 +11,7 @@ env:
   APP_PORT: ""
 
   IMAGE_REGISTRY: ${{ secrets.IMAGE_REGISTRY }}
+  IFM_IMAGE_REGISTRY: ${{ secrets.IFM_IMAGE_REGISTRY }}
   IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
   IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
 
@@ -32,7 +33,7 @@ jobs:
     - name: Set env as secret
       run: |
         import os
-        for q in (os.getenv("IMAGE_REGISTRY"),os.getenv("IMAGE_REGISTRY_USER"),os.getenv("IMAGE_REGISTRY_PASSWORD"),os.getenv("OPENSHIFT_SERVER")):
-          print(q, end='')
+        for q in (os.getenv("IMAGE_REGISTRY"),os.getenv("IFM_IMAGE_REGISTRY")):
+          print(q)
           
       shell: python 
