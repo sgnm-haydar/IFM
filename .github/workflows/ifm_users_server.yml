@@ -6,7 +6,7 @@ env:
   OPENSHIFT_TOKEN: ${{ secrets.IFM_OPENSHIFT_TOKEN }}
   OPENSHIFT_NAMESPACE: "winnext-app"
 
-  APP_NAME: "user-server"
+  APP_NAME: "users-server"
 
   APP_PORT: ""
 
