@@ -30,7 +30,7 @@ jobs:
   openshift-ci-cd:
    
     name: Build and deploy to OpenShift
-    runs-on: self-hosted
+    runs-on: [self-hosted, signum]
     environment: production
 
     outputs:
