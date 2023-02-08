@@ -46,7 +46,7 @@ jobs:
             OPENSHIFT_TOKEN: `${{ secrets.IFM_OPENSHIFT_TOKEN }}`,
           };
           const GHCR = "ghcr.io";
-          if (`${{ env.IMAGE_REGISTRY }}`.startsWith(GHCR)) {
+          if (`${{ env.TEST }}`.startsWith(GHCR)) {
             core.info(`Image registry is ${GHCR} - no registry password required`);
           }
           else {
@@ -95,6 +95,7 @@ jobs:
         context: ./Users/Server
         dockerfiles: |
           ./Users/Server/Dockerfile
+
     - name: Push to registry
       id: push-image
       uses: redhat-actions/push-to-registry@v2
