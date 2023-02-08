@@ -46,7 +46,7 @@ jobs:
             OPENSHIFT_TOKEN: `${{ secrets.IFM_OPENSHIFT_TOKEN }}`,
           };
           const GHCR = "ghcr.io";
-          if (`${{ env.TEST }}`.startsWith(GHCR)) {
+          if (`${{ env.IMAGE_REGISTRY }}`.startsWith(GHCR)) {
             core.info(`Image registry is ${GHCR} - no registry password required`);
           }
           else {
@@ -88,7 +88,7 @@ jobs:
         
     - name: Build from Dockerfile
       id: build-image
-      uses: redhat-actions/buildah-build@v2
+      uses: redhat-actions/buildah-build@latest
       with:
         image: winnext-app/${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
