@@ -90,7 +90,7 @@ jobs:
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: winnext-app/${{ env.APP_NAME }}
+        image: test-asuman/${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
         context: ./Asset/Server
         dockerfiles: |
